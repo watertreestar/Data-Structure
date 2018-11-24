@@ -14,12 +14,17 @@ public class Main {
         // 测试数组队列
         Queue<Integer> arrayQueue = new ArrayQueue<>();
         double time1 = testQueue(arrayQueue,opCount);
-        System.out.println("ArrayQueue,time:"+time1+"s");
+        System.out.println("ArrayQueue,time:"+time1+"s");   //6.03s
 
         // 测试循环队列
         Queue<Integer> loopQueue = new LoopQueue<>();
         double time2 = testQueue(loopQueue,opCount);
-        System.out.println("LoopQueue,time:"+time2+"s");
+        System.out.println("LoopQueue,time:"+time2+"s");  // 0.021s
+
+        // 测试循环队列
+        Queue<Integer> linkedListQueue = new LinkedListQueue<>();
+        double time3 = testQueue(linkedListQueue,opCount);
+        System.out.println("LinkedListQueue,time:"+time3+"s");  //0.019
 
 
     }
