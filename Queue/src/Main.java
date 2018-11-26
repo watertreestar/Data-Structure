@@ -21,7 +21,7 @@ public class Main {
         double time2 = testQueue(loopQueue,opCount);
         System.out.println("LoopQueue,time:"+time2+"s");  // 0.021s
 
-        // 测试循环队列
+        // 测试基于链表的队列
         Queue<Integer> linkedListQueue = new LinkedListQueue<>();
         double time3 = testQueue(linkedListQueue,opCount);
         System.out.println("LinkedListQueue,time:"+time3+"s");  //0.019

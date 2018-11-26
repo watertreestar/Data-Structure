@@ -2,6 +2,7 @@
  * @ClassName LinkedListQueue
  * @Author ranger
  * @Date 2018/11/24
+ * @Description 基于链表的循环队列
  **/
 public class LinkedListQueue<E> implements Queue<E> {
     private class Node {
@@ -49,7 +50,7 @@ public class LinkedListQueue<E> implements Queue<E> {
     @Override
     public void enqueue(E e){
 
-        if(tail == null){
+        if(tail == null){   // 队列为空
             tail = new Node(e);
             head = tail;
         }else{
@@ -69,7 +70,7 @@ public class LinkedListQueue<E> implements Queue<E> {
         Node retNode = head;
         head = head.next;
         retNode.next = null;
-        if(head == null){
+        if(head == null){    // 队列为空的时候，tail节点和头节点指向同一个节点
             tail = null;
         }
         size--;
