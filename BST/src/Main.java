@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  * @ClassName Main
  * @Author ranger
@@ -9,7 +12,7 @@ public class Main {
         BST<Integer> bst = new BST<>();
 
 
-        int nums[] = {5,3,6,8,4,2};
+        /*int nums[] = {5,3,6,8,4,2};
         for (int i = 0; i < nums.length; i++) {
             bst.add(nums[i]);
         }
@@ -27,10 +30,52 @@ public class Main {
 
         System.out.println();
         // 层序遍历
-        bst.levelOrder();
+        bst.levelOrder();*/
+
+        // 测试removeMax,removeMin
+
+        int count = 1000;
+        Random random = new Random();
+        for (int i = 0; i < count; i++) {
+            bst.add(random.nextInt(10000));
+        }
+
+        ArrayList<Integer> list = new ArrayList<>();
+        while(!bst.isEmpty()){
+            list.add(bst.removeMin());
+        }
+
+        for (int i = 1; i < list.size(); i++) {
+            if(list.get(i-1) > list.get(i)) throw new IllegalArgumentException("Error");
+        }
+        System.out.println(list);
+        System.out.println("removeMin completed");
+
+
+        // 测试removeMax
+        for (int i = 0; i < 10; i++) {
+            Integer num = random.nextInt(10000);
+            System.out.print(num+" ");
+            bst.add(num);
+       }
+       System.out.println();
 
 
 
-        //System.out.println(bst);
+        list = new ArrayList<>();
+        while(!bst.isEmpty()){
+            list.add(bst.removeMax());
+        }
+        System.out.println(list);
+        for (int i = 1; i < list.size(); i++) {
+            if(list.get(i-1) < list.get(i)) throw new IllegalArgumentException("Error");
+        }
+
+        System.out.println("removeMax completed");
+
+
+
+
+
     }
 }

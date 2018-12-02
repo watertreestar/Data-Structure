@@ -1,6 +1,3 @@
-import com.sun.jmx.remote.internal.ArrayQueue;
-
-import java.util.ArrayDeque;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -205,7 +202,96 @@ public class BST<E extends Comparable<E>> {
         }
     }
 
+    /**
+     * 返回二叉搜索树的最小值(递归调用，一直向左找，直到左孩子为空)
+     * @return
+     */
+    public E minimum(){
+        if(isEmpty()){
+            throw new IllegalArgumentException("BST is empty");
+        }
+        return minimum(root).e;
+    }
 
+    private Node minimum(Node node){
+        if(node.left == null)  return node;
+
+        return minimum(node.left);
+    }
+
+
+    /**
+     * 返回二叉搜索树的最大值(递归调用，一直向右走，右孩子为空的节点)
+     * @return
+     */
+    public E maximum(){
+        if(isEmpty()){
+            throw new IllegalArgumentException("BST is empty");
+        }
+        return maximum(root).e;
+    }
+
+    private Node maximum(Node node){
+        if(node.right == null)  return node;
+
+        return maximum(node.right);
+    }
+
+
+    /**
+     * 删除二叉搜索树的最小节点
+     */
+    public E removeMin(){
+        E ret = minimum();
+        root = removeMin(root);
+        return ret;
+    }
+
+    /**
+     * 删除以node为根节点的最小节点
+     * 返回删除后节点后的二分搜索树的根
+     * @param node
+     * @return
+     */
+    private Node removeMin(Node node){
+
+        if(node.left == null){
+            Node rightNode = node.right;
+            node.right = null;
+            size --;
+            return rightNode;
+        }
+        node.left = removeMin(node.left);
+        return node;
+    }
+
+    /**
+     * 删除二叉搜索树的最小节点
+     */
+    public E removeMax(){
+        E ret = maximum();
+        root = removeMax(root);
+        
+        return ret;
+    }
+
+    /**
+     * 删除以node为根节点的最小节点
+     * 返回删除后节点后的二分搜索树的根
+     * @param node
+     * @return
+     */
+    private Node removeMax(Node node){
+
+        if(node.right == null){
+            Node leftNode = node.left;
+            node.left = null;
+            size --;
+            return leftNode;
+        }
+        node.right = removeMax(node.right);
+        return node;
+    }
 
     @Override
     public String toString(){
