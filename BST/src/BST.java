@@ -172,7 +172,20 @@ public class BST<E extends Comparable<E>> {
         if(root == null) return;
         Stack<Node> stack = new Stack<>();
 
+        Node node  = root;
 
+        while(!stack.isEmpty() || node != null) {
+
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+
+            // 遍历最后一个左孩子
+            node = stack.pop();
+            System.out.print(node.e+" ");
+            node = node.right;
+        }
     }
 
     /**
@@ -181,6 +194,25 @@ public class BST<E extends Comparable<E>> {
     public void postOrderNoRecursive(){
         if(root == null) return;
 
+        Stack<Node> stack = new Stack<>();
+
+        Node node  = root;
+        Node pre = null,cur = null ;
+        stack.push(root);
+        while(!stack.isEmpty()){
+            cur = stack.peek();
+            if((cur.left == null && cur.right == null) || (pre != null && (cur.left == pre || cur.right == pre))){
+                Node temp = stack.pop();
+                System.out.println(temp.e +" ");
+                pre = temp;
+            }else{
+                if(cur.right != null)
+                    stack.push(cur.right);
+                if(cur.left != null)
+                    stack.push(cur.left);
+
+            }
+        }
 
 
     }
@@ -266,7 +298,7 @@ public class BST<E extends Comparable<E>> {
     }
 
     /**
-     * 删除二叉搜索树的最小节点
+     * 删除二叉搜索树的最大节点
      */
     public E removeMax(){
         E ret = maximum();
@@ -276,7 +308,7 @@ public class BST<E extends Comparable<E>> {
     }
 
     /**
-     * 删除以node为根节点的最小节点
+     * 删除以node为根节点的最大节点
      * 返回删除后节点后的二分搜索树的根
      * @param node
      * @return
@@ -294,9 +326,14 @@ public class BST<E extends Comparable<E>> {
     }
 
 
+    /**
+     * 删除树中的节点
+     * @param e
+     */
     public void remove(E e){
         root = remove(root,e);
     }
+
 
     private Node remove(Node node ,E e){
         if(node == null) return null;
