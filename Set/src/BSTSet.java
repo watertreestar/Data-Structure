@@ -35,5 +35,10 @@ public class BSTSet<E extends Comparable<E>> implements Set<E>{
     public void remove(E e){
         bst.remove(e);
     }
+
+    @Override
+    public String toString(){
+        return bst.toString();
+    }
 }
 
