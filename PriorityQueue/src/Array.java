@@ -134,7 +134,7 @@ public class Array<E> {
         if (i < 0 || j < 0 || i >= size || j >= size) throw new IllegalArgumentException("index is illegal");
         E t = data[i];
         data[i] = data[j];
-        data[j] = data[i];
+        data[j] = t;
     }
 
     @Override
